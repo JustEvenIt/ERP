@@ -3,10 +3,13 @@ import { CommonModule, DecimalPipe } from '@angular/common';
 import { ProductoService } from '../../../core/services/producto.service';
 import { Producto } from '../../../core/models/producto.model';
 
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { delay } from 'rxjs';
+
 @Component({
   selector: 'app-producto-list',
   standalone: true,
-  imports: [CommonModule, DecimalPipe],
+  imports: [CommonModule, DecimalPipe,MatProgressBarModule],
   templateUrl: './producto-list.html',
   styleUrl: './producto-list.scss'
 })
@@ -27,8 +30,9 @@ export class ProductoListComponent implements OnInit {
     this.error.set(null);
 
     this.productoService.listarTodos().subscribe({
-      next: (data) => {
+      next: async (data) => {
         this.productos.set(data);
+        await delay(50000);
         this.cargando.set(false);
       },
       error: (err) => {

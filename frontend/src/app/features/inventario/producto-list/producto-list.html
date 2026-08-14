@@ -5,6 +5,7 @@
 
   @if (cargando()) {
     <p>Cargando productos...</p>
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
   }
 
   @if (error()) {
