@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { ProductoService } from '../../../core/services/producto.service';
 import { Producto } from '../../../core/models/producto.model';
@@ -11,9 +11,10 @@ import { Producto } from '../../../core/models/producto.model';
   styleUrl: './producto-list.scss'
 })
 export class ProductoListComponent implements OnInit {
-  productos: Producto[] = [];
-  cargando = true;
-  error: string | null = null;
+  // Signals: Angular repinta automáticamente cuando cambian, sin depender de Zone.js
+  productos = signal<Producto[]>([]);
+  cargando = signal(true);
+  error = signal<string | null>(null);
 
   constructor(private productoService: ProductoService) {}
 
@@ -22,18 +23,18 @@ export class ProductoListComponent implements OnInit {
   }
 
   cargarProductos(): void {
-    this.cargando = true;
-    this.error = null;
+    this.cargando.set(true);
+    this.error.set(null);
 
     this.productoService.listarTodos().subscribe({
       next: (data) => {
-        this.productos = data;
-        this.cargando = false;
+        this.productos.set(data);
+        this.cargando.set(false);
       },
       error: (err) => {
         console.error('Error al cargar productos:', err);
-        this.error = 'No se pudo conectar con el backend. Verifica que esté corriendo.';
-        this.cargando = false;
+        this.error.set('No se pudo conectar con el backend. Verifica que esté corriendo.');
+        this.cargando.set(false);
       }
     });
   }

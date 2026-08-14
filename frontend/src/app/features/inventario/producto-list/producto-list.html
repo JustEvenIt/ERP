@@ -3,16 +3,16 @@
 
   <button (click)="cargarProductos()">Refrescar</button>
 
-  @if (cargando) {
+  @if (cargando()) {
     <p>Cargando productos...</p>
   }
 
-  @if (error) {
-    <p style="color: red;">{{ error }}</p>
+  @if (error()) {
+    <p style="color: red;">{{ error() }}</p>
   }
 
-  @if (!cargando && !error) {
-    @if (productos.length === 0) {
+  @if (!cargando() && !error()) {
+    @if (productos().length === 0) {
       <p>No hay productos registrados todavía. Agrega uno por consola con curl.</p>
     } @else {
       <table border="1" cellpadding="8" style="border-collapse: collapse; margin-top: 1rem; width: 100%;">
@@ -28,7 +28,7 @@
           </tr>
         </thead>
         <tbody>
-          @for (producto of productos; track producto.id) {
+          @for (producto of productos(); track producto.id) {
             <tr [style.background]="producto.stockBajo ? '#ffe5e5' : 'transparent'">
               <td>{{ producto.id }}</td>
               <td>{{ producto.nombre }}</td>
