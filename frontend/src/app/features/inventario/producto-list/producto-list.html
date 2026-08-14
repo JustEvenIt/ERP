@@ -1,0 +1,46 @@
+<div style="padding: 2rem; font-family: sans-serif;">
+  <h1>Inventario</h1>
+
+  <button (click)="cargarProductos()">Refrescar</button>
+
+  @if (cargando) {
+    <p>Cargando productos...</p>
+  }
+
+  @if (error) {
+    <p style="color: red;">{{ error }}</p>
+  }
+
+  @if (!cargando && !error) {
+    @if (productos.length === 0) {
+      <p>No hay productos registrados todavía. Agrega uno por consola con curl.</p>
+    } @else {
+      <table border="1" cellpadding="8" style="border-collapse: collapse; margin-top: 1rem; width: 100%;">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Cantidad</th>
+            <th>Unidad</th>
+            <th>Precio unitario</th>
+            <th>Stock mínimo</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (producto of productos; track producto.id) {
+            <tr [style.background]="producto.stockBajo ? '#ffe5e5' : 'transparent'">
+              <td>{{ producto.id }}</td>
+              <td>{{ producto.nombre }}</td>
+              <td>{{ producto.cantidad }}</td>
+              <td>{{ producto.unidadMedida }}</td>
+              <td>{{ producto.precioUnitario | number:'1.2-2' }}</td>
+              <td>{{ producto.stockMinimo }}</td>
+              <td>{{ producto.stockBajo ? 'Stock bajo' : 'OK' }}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    }
+  }
+</div>

@@ -1,0 +1,11 @@
+/home/harold_martinez/proyectos/mi-app/backend/src/main/java/com/miapp/backend/BackendApplication.java
+/home/harold_martinez/proyectos/mi-app/backend/src/main/java/com/miapp/backend/config/GlobalExceptionHandler.java
+/home/harold_martinez/proyectos/mi-app/backend/src/main/java/com/miapp/backend/controller/HelloController.java
+/home/harold_martinez/proyectos/mi-app/backend/src/main/java/com/miapp/backend/controller/ProductoController.java
+/home/harold_martinez/proyectos/mi-app/backend/src/main/java/com/miapp/backend/dto/ProductoRequestDTO.java
+/home/harold_martinez/proyectos/mi-app/backend/src/main/java/com/miapp/backend/dto/ProductoResponseDTO.java
+/home/harold_martinez/proyectos/mi-app/backend/src/main/java/com/miapp/backend/model/Producto.java
+/home/harold_martinez/proyectos/mi-app/backend/src/main/java/com/miapp/backend/repository/ProductoRepository.java
+/home/harold_martinez/proyectos/mi-app/backend/src/main/java/com/miapp/backend/service/ProductoNoEncontradoException.java
+/home/harold_martinez/proyectos/mi-app/backend/src/main/java/com/miapp/backend/service/ProductoService.java
+/home/harold_martinez/proyectos/mi-app/backend/src/main/java/com/miapp/backend/service/impl/ProductoServiceImpl.java
