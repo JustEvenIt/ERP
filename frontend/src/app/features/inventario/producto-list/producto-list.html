@@ -1,31 +1,24 @@
 <div style="padding: 2rem; font-family: sans-serif;">
-  <h1>Inventario</h1>
+  <div style="display:flex; justify-content:space-between; align-items:center;">
+    <h1>Inventario</h1>
+    <div>
+      <button (click)="cargarProductos()">Refrescar</button>
+      <button (click)="nuevo.emit()">+ Nuevo producto</button>
+    </div>
+  </div>
 
-  <button (click)="cargarProductos()">Refrescar</button>
-
-  @if (cargando()) {
-    <p>Cargando productos...</p>
-    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-  }
-
-  @if (error()) {
-    <p style="color: red;">{{ error() }}</p>
-  }
+  @if (cargando()) { <p>Cargando productos...</p> }
+  @if (error()) { <p style="color:red;">{{ error() }}</p> }
 
   @if (!cargando() && !error()) {
     @if (productos().length === 0) {
-      <p>No hay productos registrados todavía. Agrega uno por consola con curl.</p>
+      <p>No hay productos registrados todavía.</p>
     } @else {
       <table border="1" cellpadding="8" style="border-collapse: collapse; margin-top: 1rem; width: 100%;">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Nombre</th>
-            <th>Cantidad</th>
-            <th>Unidad</th>
-            <th>Precio unitario</th>
-            <th>Stock mínimo</th>
-            <th>Estado</th>
+            <th>ID</th><th>Nombre</th><th>Cantidad</th><th>Unidad</th>
+            <th>Precio unitario</th><th>Stock mínimo</th><th>Estado</th><th>Acciones</th>
           </tr>
         </thead>
         <tbody>
@@ -38,6 +31,10 @@
               <td>{{ producto.precioUnitario | number:'1.2-2' }}</td>
               <td>{{ producto.stockMinimo }}</td>
               <td>{{ producto.stockBajo ? 'Stock bajo' : 'OK' }}</td>
+              <td>
+                <button (click)="editar.emit(producto)">Editar</button>
+                <button (click)="onEliminar(producto)">Eliminar</button>
+              </td>
             </tr>
           }
         </tbody>
