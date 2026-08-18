@@ -2,7 +2,9 @@
   <div style="display:flex; justify-content:space-between; align-items:center;">
     <h1>Inventario</h1>
     <div>
-      <button mat-stroked-button (click)="cargarProductos()">Refrescar</button>
+      <button mat-icon-buttonmat-stroked-button (click)="cargarProductos()">
+        <mat-icon></mat-icon>
+      </button>
       <button mat-flat-button color="primary" (click)="nuevo.emit()">+ Nuevo producto</button>
     </div>
   </div>

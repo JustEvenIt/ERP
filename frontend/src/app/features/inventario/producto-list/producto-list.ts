@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, signal, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, signal, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { MatTableModule, MatTableDataSource } from '@angular/material/table';
 import { MatSortModule, MatSort } from '@angular/material/sort';
@@ -21,7 +21,7 @@ import { Producto } from '../../../core/models/producto.model';
   templateUrl: './producto-list.html',
   styleUrl: './producto-list.scss'
 })
-export class ProductoListComponent implements OnInit, AfterViewInit {
+export class ProductoListComponent implements OnInit {
   // Columnas que se muestran, en orden. "acciones" no es un campo real, es el de los botones.
   displayedColumns: string[] = [
     'id', 'nombre', 'cantidad', 'unidadMedida',
@@ -37,20 +37,22 @@ export class ProductoListComponent implements OnInit, AfterViewInit {
   @Output() nuevo = new EventEmitter<void>();
   @Output() editar = new EventEmitter<Producto>();
 
-  // Referencias a los componentes de Material que van en el HTML (mat-sort y mat-paginator)
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) set sort(sort: MatSort) {
+    if (sort) {
+      this.dataSource.sort = sort;
+    }
+  }
+
+  @ViewChild(MatPaginator) set paginator(paginator: MatPaginator) {
+    if (paginator) {
+      this.dataSource.paginator = paginator;
+    }
+  }
 
   constructor(private productoService: ProductoService) {}
 
   ngOnInit(): void {
     this.cargarProductos();
-  }
-
-  // Se ejecuta después de que el HTML ya está renderizado, ahí sí existen sort/paginator
-  ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
   }
 
   cargarProductos(): void {
