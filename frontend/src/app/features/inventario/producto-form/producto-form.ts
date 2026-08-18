@@ -3,11 +3,18 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ProductoService } from '../../../core/services/producto.service';
 import { Producto } from '../../../core/models/producto.model';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-producto-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,
+    MatFormFieldModule, MatInputModule, MatButtonModule,
+    MatCardModule, MatProgressSpinnerModule],
   templateUrl: './producto-form.html',
   styleUrl: './producto-form.scss'
 })
