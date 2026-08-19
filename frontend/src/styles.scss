@@ -37,3 +37,7 @@ body {
   height: 100%;
 }
 /* You can add global styles to this file, and also import other style files */
+.snackbar-error {
+  --mdc-snackbar-container-color: #d32f2f;
+  --mdc-snackbar-supporting-text-color: white;
+}

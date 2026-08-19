@@ -1,0 +1,29 @@
+<mat-sidenav-container class="sidenav-container">
+
+  <mat-sidenav #sidenav mode="side" [opened]="sidenavAbierto()" class="sidenav">
+    <mat-nav-list>
+      @for (modulo of modulos; track modulo.ruta) {
+        <a mat-list-item [routerLink]="modulo.ruta" routerLinkActive="activo">
+          <mat-icon matListItemIcon>{{ modulo.icono }}</mat-icon>
+          <span matListItemTitle>{{ modulo.label }}</span>
+        </a>
+      }
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <mat-toolbar color="primary" class="toolbar">
+      <button mat-icon-button (click)="toggleSidenav()" aria-label="Abrir/cerrar menú">
+        <mat-icon>menu</mat-icon>
+      </button>
+
+      <img src="/img/logo-plastinnova.png" alt="Plastinnova" class="logo" href="/" />
+      <span class="titulo">OpenLux</span>
+    </mat-toolbar>
+
+    <main class="contenido">
+      <router-outlet></router-outlet>
+    </main>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
